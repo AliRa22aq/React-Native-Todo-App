@@ -16,6 +16,13 @@ const TodoList = ({todoList, setTodoList}: any) => {
 
         setTodoList(updatedList)
     }
+
+    const deleteTodo = (id: number) => {
+        const updatedList = todoList.filter((item:any) => {return (item.id != id)})
+        setTodoList(updatedList)
+    }
+    deleteTodo
+
     return (
         <List>
            { todoList.map((item: any) => (
@@ -27,7 +34,9 @@ const TodoList = ({todoList, setTodoList}: any) => {
                  checked={item.status}  />
                  </View>
                  <Text  style={{flex:5}}> {item.task} </Text>
-                 <Icon name='trash'  style={{flex:1}} />
+                 <Icon 
+                 onPress={()=> deleteTodo(item.id)}
+                 name='trash'  style={{flex:1}} />
                  </ListItem>
             ))}
            
