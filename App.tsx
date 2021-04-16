@@ -13,7 +13,7 @@ export default function App() {
 
 
   const [isReady, setIsReady] = useState(false);
-  const [showAddTodoScreen, setShowAddTodoScreen] = useState(true);
+  const [showAddTodoScreen, setShowAddTodoScreen] = useState(false);
   const [todoList, setTodoList] = useState([
     {
       id: 1,
@@ -31,6 +31,9 @@ export default function App() {
       status: false,
     }
   ]);
+
+  const [counter, setCounter] = useState(todoList.length + 1)
+
 
   useEffect(() => {
     (
@@ -54,6 +57,14 @@ export default function App() {
   const addTodoItem = (todoText: string) => {
     console.log("From app.tsx", todoText);
     setShowAddTodoScreen(false);
+    setCounter(counter+1)
+    const todoItem = {
+      id: counter,
+      task: todoText,
+      status: false,      
+    }
+
+    setTodoList([...todoList, todoItem])
   }
 
   if(showAddTodoScreen) {
@@ -77,7 +88,7 @@ export default function App() {
                 onPress= {()=> {setShowAddTodoScreen(true)}}
 
         ><Text> Add Todo </Text></Button>
-        <TodoList todoList={todoList} />
+        <TodoList todoList={todoList} setTodoList={setTodoList} />
       </Content>
       <Footer>
         <FooterTab>
