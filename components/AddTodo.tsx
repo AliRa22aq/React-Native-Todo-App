@@ -1,34 +1,62 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet} from 'react-native'
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Input } from 'native-base';
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Input, Form, Item, Label } from 'native-base';
 
 
-const AddTodo = () => {
+export const AddTodo = (props: any) => {
 
-    return (
-        <Container>
 
-        <Header>
-          <Body style={{ alignItems: "center", flex:5 }}>
-            <Title>Todo App</Title>
-          </Body>
-        </Header>
+    const [text, setText] = useState("");
 
-        <Content>
-          <Text> Todo App </Text>
-          <Button full success style={{ margin: 30 }}><Text> Add </Text></Button>
-        </Content>
+  return (
+    <Container>
 
-        <Footer>
-          <FooterTab>
-            <Button full>
-              <Text>Footer</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
 
-      </Container>
-    )
+      <Header>
+        <Body style={{ alignItems: "center" }}>
+          <Title>Todo App</Title>
+        </Body>
+      </Header>
+
+
+      <Content>
+              <Form style={{margin: 20}}>
+                  <Item stackedLabel>
+                      <Label>Add your todo</Label>
+                      <Input onChangeText={setText}/>
+                  </Item>
+                  <Button 
+                        full 
+                        success 
+                        style={{ margin: 30 }} 
+                        onPress= {()=> {
+                            console.log("Dispatched", text)
+                            props.addTodoItem(text)
+                            
+                            }}> 
+                        <Text> Add Please</Text></Button>
+              </Form>
+      </Content>
+
+
+      <Footer>
+        <FooterTab>
+          <Button full>
+            <Text>Footer</Text>
+          </Button>
+        </FooterTab>
+      </Footer>
+    </Container>
+  );
 }
 
-export default AddTodo
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
+  

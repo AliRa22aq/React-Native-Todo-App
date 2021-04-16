@@ -5,7 +5,7 @@ import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Input } from 'native-base';
 import TodoList from './components/TodoList'
-import AddTodo from './components/AddTodo';
+import {AddTodo} from './components/AddTodo';
 
 
 
@@ -13,7 +13,7 @@ export default function App() {
 
 
   const [isReady, setIsReady] = useState(false);
-  const [showAddTodoScreen, setShowAddTodoScreen] = useState(false);
+  const [showAddTodoScreen, setShowAddTodoScreen] = useState(true);
   const [todoList, setTodoList] = useState([
     {
       id: 1,
@@ -51,11 +51,18 @@ export default function App() {
       )
   }
 
+  const addTodoItem = (todoText: string) => {
+    console.log("From app.tsx", todoText);
+    setShowAddTodoScreen(false);
+  }
+
   if(showAddTodoScreen) {
     return (
-      <Text> <AddTodo /> </Text>
+      <View> <AddTodo addTodoItem= {addTodoItem} /> </View>
     )
   }
+
+
 
   return (
     <Container>
